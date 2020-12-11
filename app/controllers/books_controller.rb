@@ -10,4 +10,8 @@ class BooksController < ApplicationController
 
   def edit
   end
+
+  def top
+
+  end
 end
