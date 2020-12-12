@@ -13,7 +13,9 @@ class BooksController < ApplicationController
 
     else
 
-      render books_path
+      # indexアクションの方で@booksを作るのに、記述しないと反映されずindex画面でエラー
+      @books = Book.all
+      render 'index'
 
     end
 
@@ -46,10 +48,22 @@ end
   end
 
   def update
-    book = Book.find(params[:id])
-    book.update(book_params)
-    flash[:success] = 'Book was successfully updated.'
-    redirect_to book_path(book.id)
+
+    @book = Book.find(params[:id])
+
+    if @book.update(book_params)
+
+      flash[:success] = 'Book was successfully updated.'
+      redirect_to book_path(@book.id)
+
+    else
+
+      # 20201212規約のパスの表現でなくページファイル名を記述するらしい
+      # ↓は誤り
+      # render edit_book_path
+      render 'edit'
+    end
+
   end
 
 
