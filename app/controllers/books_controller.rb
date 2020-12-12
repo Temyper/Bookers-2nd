@@ -1,28 +1,23 @@
 class BooksController < ApplicationController
 
-def create
+  def create
 
     @book = Book.new(book_params)
 
-    @book.save
+    # 20201212不自然なエラーについて、全角スペースが混じっている可能性
+    if @book.save
 
-    flash[:success] = 'Book was successfully created.'
+      flash[:success] = 'Book was successfully created.'
 
-    redirect_to book_path(@book.id)
-# 20201212なぜかif文がエラーを起こす。エラー発生の最小単位は一番下
-    # if　@book.save
+      redirect_to book_path(@book.id)
 
-    #   flash[:success] = 'Book was successfully created.'
+    else
 
-    #   redirect_to book_path(@book.id)
+      render books_path
 
-    # else
+    end
 
-    #   render books_path
-
-    # end
-
-end
+  end
 
 
 def index
@@ -70,20 +65,3 @@ end
   end
 
 end
-
-# # if文エラーの最小単位
-# class BooksController < ApplicationController
-
-#   def create
-
-#     # if文が無ければエラー「syntax error, unexpected end, expecting end-of-input」は起きない
-
-#       # thenは使えない
-#       # if　1+1==2 then
-#     if　1+1==2
-
-#     end
-
-#   end
-
-# end
