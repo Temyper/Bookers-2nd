@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
 
- def create
+def create
 
     @book = Book.new(book_params)
 
@@ -22,13 +22,13 @@ class BooksController < ApplicationController
 
     # end
 
- end
+end
 
 
- def index
+def index
     @books = Book.all
     @book = Book.new
- end
+end
 
 
   def show
@@ -71,15 +71,19 @@ class BooksController < ApplicationController
 
 end
 
-# if文エラーの最小単位
+# # if文エラーの最小単位
 # class BooksController < ApplicationController
 
-# def create
+#   def create
 
+#     # if文が無ければエラー「syntax error, unexpected end, expecting end-of-input」は起きない
+
+#       # thenは使えない
+#       # if　1+1==2 then
 #     if　1+1==2
 
 #     end
 
-# end
+#   end
 
 # end
